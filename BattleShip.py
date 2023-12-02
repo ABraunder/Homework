@@ -214,7 +214,7 @@ class Game:
             board = self.generation_board()
         return board
 
-    def show_board(self): 
+    def show_board(self):
         print('-' * self.size * 10)
         print('Ваша доска:'.ljust((self.size + 1) * 4 - 1) + ' ' * self.size + 'Доска Бота:')
         for s1, s2 in zip(self.player.board.__str__().split('\n'), self.bot.board.__str__().split('\n')):
