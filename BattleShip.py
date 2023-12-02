@@ -143,7 +143,7 @@ class Player:
             except BoardOutException as exc:
                 print(exc)
 
-#Логика AI
+#Логика AI 
 class BOT(Player):
     def ask(self) -> Dot:
         last = self.enemy.lasthit
