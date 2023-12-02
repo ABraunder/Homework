@@ -109,7 +109,7 @@ class Board:
                     self.outlining(ship, visible=True)
                     print('Корабль уничтожен!')
                     self.lasthit = []
-                    return False
+                    return True
                 else:
                     print('Корабль горит!')
                     self.lasthit.append(d)
