@@ -63,9 +63,9 @@ class Board:
     def __str__(self):
         b = '  | ' + ' | '.join(map(str, range(1, self.size + 1)))
         for i, row in enumerate(self.field):
-            b += f'\n{i + 1} | ' + ' | '.join(row)
+            b += f'\n{i + 1} | ' + ' | '.join(row) #Разделители
         if self.hid:
-            b = b.replace('■', '1')
+            b = b.replace('■', '0') #Скрытие кораблей бота
         return b
 
     def out(self, d: Dot) -> bool:
@@ -81,7 +81,7 @@ class Board:
                         self.field[coor_dot.x][coor_dot.y] = '●'  # Символ при промахе
                     self.busy.append(coor_dot)
 
-    def add_ship(self, ship):
+    def add_ship(self, ship): #Установка кораблей
         for d in ship.dots:
             if d in self.busy or self.out(d):
                 raise BoardWrongShipException()
@@ -101,7 +101,7 @@ class Board:
 
         for ship in self.ships:
             if ship.hit(d):
-                self.field[d.x][d.y] = 'X'
+                self.field[d.x][d.y] = 'X' #Символ при попадании
                 print('Попал!')
                 ship.lives -= 1
                 if ship.lives == 0:
@@ -143,7 +143,7 @@ class Player:
             except BoardOutException as exc:
                 print(exc)
 
-
+#Логика AI
 class BOT(Player):
     def ask(self) -> Dot:
         last = self.enemy.lasthit
@@ -191,7 +191,7 @@ class Game:
         self.bot = BOT(bot_board, user_board)
         self.player = User(user_board, bot_board)
 
-    def generation_board(self):
+    def generation_board(self): #Генерация поля боя
         attempts = 0
         board = Board(size=self.size)
         for l in self.lens:
@@ -214,7 +214,7 @@ class Game:
             board = self.generation_board()
         return board
 
-    def show_board(self):
+    def show_board(self): 
         print('-' * self.size * 10)
         print('Ваша доска:'.ljust((self.size + 1) * 4 - 1) + ' ' * self.size + 'Доска Бота:')
         for s1, s2 in zip(self.player.board.__str__().split('\n'), self.bot.board.__str__().split('\n')):
