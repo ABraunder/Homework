@@ -214,11 +214,34 @@ class Game:
             board = self.generation_board()
         return board
 
+    @staticmethod
+    def greet():
+        print('ⵈ━══════╗◊╔══════━ⵈ')
+        print('┊ Добро пожаловать ┊')
+        print('┊     в игру       ┊')
+        print('┊   Морской бой    ┊')
+        print('ⵈ━══════╝◊╚══════━ⵈ')
+        sleep(5)
+        print('Загрузка игры...')
+        sleep(randint(1, 5))
+        print('Расстановка кораблей...')
+        sleep(randint(1, 5))
+        print('Промывка мозгов...')
+        sleep(randint(1, 5))
+        print('Загрузка завершена!')
+        sleep(2)
+        print('ⵈ━══════╗◊╔══════━ⵈ')
+        print('┊Формат ввода: x y ┊')
+        print('┊x - номер строки  ┊')
+        print('┊y - номер столбца ┊')
+        print('ⵈ━══════╝◊╚══════━ⵈ')
+
     def show_board(self):
         print('-' * self.size * 10)
         print('Ваша доска:'.ljust((self.size + 1) * 4 - 1) + ' ' * self.size + 'Доска Бота:')
         for s1, s2 in zip(self.player.board.__str__().split('\n'), self.bot.board.__str__().split('\n')):
             print(s1 + ' ' * self.size + s2)
+        print('-' * self.size * 10)
 
     def loop(self):
         step = 0
@@ -244,6 +267,7 @@ class Game:
             step += 1
 
     def start(self):
+        self.greet()
         self.loop()
 
 g = Game()
